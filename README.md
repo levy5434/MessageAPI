@@ -18,22 +18,37 @@ Example shows how to use API with cURL.
 
 To get a message use:
 ```
-curl --location --request GET 'http://krzycho5434.pythonanywhere.com/api/message/<message_id>/'
+curl --location --request GET \
+'http://krzycho5434.pythonanywhere.com/api/message/<message_id>/'
 ```
 To get authentication token sent to your email use:
 ```
-curl --location --request POST 'http://krzycho5434.pythonanywhere.com/api/token' --header 'Content-Type: application/json' --data-raw '{"email":"<your_email_address>"}'
+curl --location --request POST \
+'http://krzycho5434.pythonanywhere.com/api/token/' \
+--header 'Content-Type: application/json' \
+--data-raw '{"email":"<your_text_message>"}'
 ```
 To create a message use:
 ```
-curl --location --request POST 'http://krzycho5434.pythonanywhere.com/api/message/' --header 'Content-Type: application/json' --header 'Authorization: Token <authentication_token>' --data-raw '{"text":"<your_text_message>"}'
+curl --location --request POST \
+'http://krzycho5434.pythonanywhere.com/api/message/' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <authentication_token>' \
+--data-raw '{"text":"<your_text_message>"}'
 ```
 To update existing message use:
 ```
-curl --location --request PUT 'http://krzycho5434.pythonanywhere.com/api/message/<message_id>/' --header 'Content-Type: application/json' --header 'Authorization: Token <authentication_token>' --data-raw '{"text":"<your_new_text_message>"}'
+curl --location --request PUT \
+'http://krzycho5434.pythonanywhere.com/api/message/<message_id>/' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <authentication_token>' \
+--data-raw '{"text":"<your_new_text_message>"}'
 ```
 To delete existing message use:
 ```
-curl --location --request DELETE 'http://krzycho5434.pythonanywhere.com/api/message/<message_id>/' --header 'Content-Type: application/json' --header 'Authorization: Token <authentication_token>'
+curl --location --request DELETE \
+'http://krzycho5434.pythonanywhere.com/api/message/<message_id>/' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Token <authentication_token>'
 ```
 
