@@ -1,6 +1,6 @@
 # MessageAPI
 
-Website which stores messages with views counter. Authenticated users can create messages, deletes them and updates which resets views counter. Any user is allowed to get a message, see it's content and view counter.
+Website which stores text messages  up to 160 characters with their views counter. Authenticated users can create messages, delete them and update which resets views counter. Any user is allowed to get a message, see it's content and views counter.
 
 Live version: http://krzycho5434.pythonanywhere.com/
 
