@@ -37,7 +37,7 @@ curl --location --request POST \
 --header 'Authorization: Token <authentication_token>' \
 --data-raw '{"text":"<your_text_message>"}'
 ```
-To update existing message use:
+To update an existing message use:
 ```
 curl --location --request PUT \
 'http://krzycho5434.pythonanywhere.com/api/message/<message_id>/' \
@@ -45,7 +45,7 @@ curl --location --request PUT \
 --header 'Authorization: Token <authentication_token>' \
 --data-raw '{"text":"<your_new_text_message>"}'
 ```
-To delete existing message use:
+To delete an existing message use:
 ```
 curl --location --request DELETE \
 'http://krzycho5434.pythonanywhere.com/api/message/<message_id>/' \
