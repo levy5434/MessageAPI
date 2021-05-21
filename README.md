@@ -7,6 +7,7 @@ Live version: http://krzycho5434.pythonanywhere.com/
 ## Table of contents
 * [Technologies](#technologies)
 * [URLs](#urls)
+* [Deployment](#Deployment)
 
 ## Technologies
 * Python version: 3.9.5
@@ -51,4 +52,21 @@ curl --location --request DELETE \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Token <authentication_token>'
 ```
+## Deployment
+Project has been uploaded to pythonanywhere.com 
+To run your project on the site. You have got to make an account, then create new app.
+On the app bash console install python and make a virtual enviroment. Clone your project from github and install required packages using:
+```
+pip install -r requirements.txt
+```
+In Web options on pythonanywhere.com UI set the source code, working directory, virtualenv and wsgi configuration file paths.
 
+Point your Django project setting is wsgi file:
+```
+os.environ['DJANGO_SETTINGS_MODULE'] = 'mysite.settings'
+```
+Last thing is to update project ALLOWED_HOSTS settings.
+```
+ ALLOWED_HOSTS =['*'] 
+```
+Reload your app in user interface.
