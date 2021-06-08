@@ -32,3 +32,4 @@ def get_token() -> Token:
     )[0]
     token = Token.objects.get_or_create(user=dummy_user)[0]
     return token
+
