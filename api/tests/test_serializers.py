@@ -50,7 +50,9 @@ class TestMessageSerializer:
         assert serializer.validated_data == {"text": "Some test text"}
         assert serializer.data == {"text": "Some test text"}
         assert serializer.errors == {}
-        assert type(serializer.create(serializer.validated_data)) != None
+        assert (
+            type(serializer.create(serializer.validated_data)) != None
+        )  # noqa
 
     def test_empty_text(self):
         """Tests empty text serializer."""

@@ -1,9 +1,10 @@
 from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import Permission, User
-from django.conf import settings
-from django.core.mail import send_mail
+from django.contrib.auth.models import User
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+import os
 
 
 def send_token(email) -> None:
@@ -11,13 +12,15 @@ def send_token(email) -> None:
     try:
         validate_email(email)
         token = get_token()
-        subject = "Authentication Token"
-        message = f"Use this token to authenticate your API calls. \n {token}"
-        email_from = settings.EMAIL_HOST_USER
-        recipient_list = [
-            email,
-        ]
-        send_mail(subject, message, email_from, recipient_list)
+        text = f"<p>Recruitment task - KL</p> <p>Use this token to authenticate your API calls.</p> <p>{token}</p>"  # noqa
+        message = Mail(
+            from_email="rmarsh7@int.pl",
+            to_emails=email,
+            subject="Authentication token",
+            html_content=text,
+        )
+        sg = SendGridAPIClient(os.getenv("SENDGRID_API_CLIENT"))
+        sg.send(message)
     except ValidationError as e:
         print("Wrong email address, details:", e)
 

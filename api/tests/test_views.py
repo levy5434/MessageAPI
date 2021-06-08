@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework.test import APIClient, APIRequestFactory
 from django.urls import reverse
 import pytest
-from api.views import MessageViewSet, ObtainTokenView
+from api.views import ObtainTokenView
 from mixer.backend.django import mixer
 
 
@@ -18,7 +18,7 @@ class TestObtainTokenView:
         request = self.factory.post(url, {"email": "test@test.com"})
         response = ObtainTokenView.as_view()(request)
         assert response.data == {
-            "Success": "Token has been sent to your email. Use it to authenticate your API calls."
+            "Success": "Token has been sent to your email. Use it to authenticate your API calls."  # noqa
         }
         assert response.status_code == 200
 
@@ -56,7 +56,7 @@ class TestMessageViewSet:
 
     def test_get_message(self):
         """Tests retrieving single message with no authentication."""
-        message = mixer.blend("api.Message", text="Some test text.")
+        mixer.blend("api.Message", text="Some test text.")
         url = reverse("api:message-detail", kwargs={"pk": 1})
         response = self.client.get(url)
         assert response.status_code == 200
@@ -68,7 +68,7 @@ class TestMessageViewSet:
 
     def test_incrementing_message_view_counter(self):
         """Tests incrementing view counter."""
-        message = mixer.blend("api.Message", text="Some test text.")
+        mixer.blend("api.Message", text="Some test text.")
         url = reverse("api:message-detail", kwargs={"pk": 1})
         response = self.client.get(url)
         assert response.status_code == 200
@@ -111,7 +111,7 @@ class TestMessageViewSet:
     def test_authenticated_update_message(self, dummy_user):
         """Tests updating a message when authenticated."""
         self.client.force_authenticate(user=dummy_user)
-        message = mixer.blend("api.Message", text="Some test text.")
+        mixer.blend("api.Message", text="Some test text.")
         url = reverse("api:message-detail", kwargs={"pk": 1})
         response = self.client.put(url, {"text": "Updated text."})
         self.client.force_authenticate(user=None)
@@ -124,7 +124,7 @@ class TestMessageViewSet:
 
     def test_unauthenticated_update_message(self):
         """Tests updating a message without authentication."""
-        message = mixer.blend("api.Message", text="Some test text.")
+        mixer.blend("api.Message", text="Some test text.")
         url = reverse("api:message-detail", kwargs={"pk": 1})
         response = self.client.put(url, {"text": "Updated text."})
         assert response.status_code == 401
@@ -136,7 +136,7 @@ class TestMessageViewSet:
     def test_authenticated_delete_message(self, dummy_user):
         """Tests deleting a message when authenticated."""
         self.client.force_authenticate(user=dummy_user)
-        message = mixer.blend("api.Message", text="Some test text.")
+        mixer.blend("api.Message", text="Some test text.")
         url = reverse("api:message-detail", kwargs={"pk": 1})
         response = self.client.delete(url)
         self.client.force_authenticate(user=None)
@@ -147,7 +147,7 @@ class TestMessageViewSet:
 
     def test_unauthenticated_delete_message(self):
         """Tests updating a message without authentication."""
-        message = mixer.blend("api.Message", text="Some test text.")
+        mixer.blend("api.Message", text="Some test text.")
         url = reverse("api:message-detail", kwargs={"pk": 1})
         response = self.client.delete(url)
         assert response.status_code == 401
