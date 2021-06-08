@@ -13,3 +13,4 @@ urlpatterns = [
     path("", include(router.urls)),
     path("token/", views.ObtainTokenView.as_view(), name="obtain_token"),
 ]
+

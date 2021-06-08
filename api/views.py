@@ -63,7 +63,8 @@ class ObtainTokenView(generics.CreateAPIView):
 
     def create(self, request) -> Response:
         """
-        Checks if correct email was sent with request, if so sends authentication token
+        Checks if correct email was sent with request,
+        if so sends authentication token
         to user's email and returns response with status.
         """
         serializer = EmailSerializer(data=request.data)
@@ -75,7 +76,7 @@ class ObtainTokenView(generics.CreateAPIView):
         send_token(email)
         return Response(
             {
-                "Success": "Token has been sent to your email. Use it to authenticate your API calls."
+                "Success": "Token has been sent to your email. Use it to authenticate your API calls."  # noqa
             },
             status=status.HTTP_200_OK,
         )
