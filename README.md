@@ -2,12 +2,12 @@
 
 Website which stores text messages  up to 160 characters with their views counter. Authenticated users can create messages, delete them and update which resets views counter. Any user is allowed to get a message, see it's content and views counter.
 
-Live version: http://krzycho5434.pythonanywhere.com/
+Live version: http://appmessageapi.azurewebsites.net/
 
 ## Table of contents
 * [Technologies](#technologies)
 * [URLs](#urls)
-* [Deployment](#Deployment)
+* [Deployment](#deployment)
 
 ## Technologies
 * Python version: 3.9.5
@@ -53,4 +53,20 @@ curl --location --request DELETE \
 --header 'Authorization: Token <authentication_token>'
 ```
 ## Deployment
-Application has been deployed via Azure Container Registry and Azure Web App Service.
+Application has been deployed via Azure Container Registry and Azure Web App Service.\
+To deploy this project first create a tagged container:
+```
+docker build -t [container's_name]:[version] .
+```
+Then create new container registry in Azure Container Registry service and enable `Admin user` in `Access keys` to get passwords for logging into service.\
+In terminal login to Container Registry service and push container to cloud:
+```
+docker login [login_server]
+docker push [container's_name]:[version]
+```
+After successfully uploading container's image, `Create Web App` in Azure Web App Service. Change `Publish` option to Docker Container and choose `Image Source` to Azure Container Registry and newly pushed image.\
+After creating the Web App go to `Configuration` and add new application setting:
+```
+WEBSITES_PORT:8000
+```
+Application is ready to work on Azure Web App Service.
